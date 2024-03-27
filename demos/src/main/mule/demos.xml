@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="cd36c21b-1d56-4bab-9575-e34f03c60841" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="demosFlow" doc:id="49edf087-cb7a-4c13-a996-ea24627cd3af" >
+		<http:listener doc:name="Listener" doc:id="8a79789a-7a6f-466d-b62e-539d00eb29f6" config-ref="HTTP_Listener_config" path="/demos"/>
+		<logger level="INFO" doc:name="Logger" doc:id="760a0980-0940-4b66-a0d9-42ed8ede14d0" message="this is main  flow"/>
+		<flow-ref doc:name="Flow Reference" doc:id="4c32bb31-f044-49c5-a244-d73196fa0c6f" name="demosSub_Flow"/>
+	</flow>
+	<sub-flow name="demosSub_Flow" doc:id="5de4f331-90b1-467d-aced-ef22e516e1f2" >
+		<logger level="INFO" doc:name="Logger" doc:id="796c65ad-9dd1-443f-bcf0-555954f716b7" message="this is subflow"/>
+	</sub-flow>
+</mule>
